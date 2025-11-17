@@ -50,3 +50,39 @@ let Player = (name, symbol) => {
     getWins
   };
 };
+
+let GameController = () => {
+  const board = Gameboard();
+  const player1 = Player("Player 1", "X");
+  const player2 = Player("Player 2", "O")
+
+  player1.setTurn(true);
+  player2.setTurn(false);
+
+  const playMove = (row, col) => {
+    const cell = board.board[row][col];
+    if (!cell.isEmpty()) return;
+
+    const currentPlayer = player1.isTurn() ? player1 : player2;
+    cell.setValue(currentPlayer.getSymbol());
+  };
+
+  const switchPlayer = () => {};
+  
+  const checkWinner = () => {};
+
+  const checkTie = () => {};
+
+  const resetGame = () => {};
+
+  const getBoard = () => {};
+
+  return {
+    playMove,
+    switchPlayer,
+    checkWinner,
+    checkTie,
+    resetGame,
+    getBoard
+  };
+};
