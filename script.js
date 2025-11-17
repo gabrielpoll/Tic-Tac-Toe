@@ -67,8 +67,16 @@ let GameController = () => {
     cell.setValue(currentPlayer.getSymbol());
   };
 
-  const switchPlayer = () => {};
-  
+  const switchPlayer = () => {
+    if (player1.isTurn()) {
+      player1.setTurn(false);
+      player2.setTurn(true);
+    } else {
+        player2.setTurn(false);
+        player1.setTurn(true);
+    }
+  };
+
   const checkWinner = () => {};
 
   const checkTie = () => {};
