@@ -77,7 +77,26 @@ let GameController = () => {
     }
   };
 
-  const checkWinner = () => {};
+  const checkWinner = () => {
+    for (let i = 0; i < 3; i++) {
+      const row = board.board[i];
+      const a = row[0].getValue();
+      const b = row[1].getValue();
+      const c = row[2].getValue();
+      if (a === b && b === c && a !== "") {
+        return a;
+      }
+    };
+    for (let i = 0; i < 3; i++) {
+      const a = board.board[0][i].getValue();
+      const b = board.board[1][i].getValue();
+      const c = board.board[2][i].getValue();
+      if (a === b && b === c && a !== "") {
+        return a;
+      }
+    }
+    return null;
+  };
 
   const checkTie = () => {};
 
