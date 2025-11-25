@@ -39,6 +39,8 @@ let Player = (name, symbol) => {
     wins++;
   };
 
+  const resetWins = () => wins = 0;
+
   const getWins = () => wins;
 
   return {
@@ -47,14 +49,15 @@ let Player = (name, symbol) => {
     isTurn,
     setTurn,
     addWin,
-    getWins
+    getWins,
+    resetWins
   };
 };
 
 let GameController = () => {
-  const board = Gameboard();
-  const player1 = Player("Player 1", "X");
-  const player2 = Player("Player 2", "O")
+  let board = Gameboard();
+  let player1 = Player("Player 1", "X");
+  let player2 = Player("Player 2", "O")
 
   player1.setTurn(true);
   player2.setTurn(false);
@@ -115,7 +118,16 @@ let GameController = () => {
     return true;
   };
 
-  const resetGame = () => {};
+  const resetGame = () => {
+    for (let i = 0; i < 3; i++) {
+      for (let ii = 0; ii < 3; ii++) {
+        let cell = board.board[i][ii];
+        cell.setValue("");
+      }
+    }
+    player1.setTurn(true);
+    player2.setTurn(false);
+  };
 
   const getBoard = () => board;
 
