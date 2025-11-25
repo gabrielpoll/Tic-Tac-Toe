@@ -98,6 +98,20 @@ let GameController = () => {
         return a;
       }
     }
+    let a = board.board[0][0].getValue();
+    let b = board.board[1][1].getValue();
+    let c = board.board[2][2].getValue();
+    if (a === b && b === c && a !== "") {
+      return a;
+    };
+
+    let aa = board.board[0][2].getValue();
+    let bb = board.board[1][1].getValue();
+    let cc = board.board[2][0].getValue();
+    if (aa === bb && bb === cc && aa !== "") {
+      return aa;
+    };
+
     return null;
   };
 
