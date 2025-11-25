@@ -98,11 +98,26 @@ let GameController = () => {
     return null;
   };
 
-  const checkTie = () => {};
+  const checkTie = () => {
+    let checkWin = checkWinner();
+    if (checkWin !== null) {
+      return false;
+    };
+
+    for (let i = 0; i < 3; i++) {
+      for (let ii = 0; ii < 3; ii++) {
+        let cell = board.board[i][ii];
+        if (cell.isEmpty()) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
 
   const resetGame = () => {};
 
-  const getBoard = () => {};
+  const getBoard = () => board;
 
   return {
     playMove,
