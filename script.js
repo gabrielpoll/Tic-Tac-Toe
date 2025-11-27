@@ -155,3 +155,68 @@ let GameController = () => {
   };
 };
 
+const game = GameController();
+
+let displayController = (() => {
+  const boardElement = document.getElementById("gameboard");
+  const cellElements = document.querySelectorAll(".cell");
+  const messageDisplay = document.getElementById("message");
+  const resetButton = document.getElementById("reset")
+
+  function renderBoard() {
+    const board = game.getBoard().board;
+
+    cellElements.forEach((cell, index) => {
+      const row = Math.floor(index / 3);
+      const col = index % 3;
+
+      cell.textContent = board[row][col].getValue();
+    });
+  }
+
+  function setMessage(msg) {
+    messageDisplay.textContent = msg;
+  }
+
+  function handleCellClick(e) {
+    const index = e.target.dataset.index;
+    const row = Math.floor(index / 3);
+    const col = index % 3;
+
+    const cell = game.getBoard().board[row][col];
+    if (!cell.isEmpty()) return;
+
+    game.playMove(row, col);
+
+    renderBoard();
+
+    const winner = game.checkWinner();
+    if (winner) {
+      setMessage(`Jogador "${winner}" venceu`);
+      return;
+    }
+
+    if (game.checkTie()) {
+      setMessage("Empate!");
+      return;
+    }
+
+    game.switchPlayer();
+  }
+
+  function handleReset() {
+    game.resetGame();
+    renderBoard();
+    setMessage("");
+  }
+
+  cellElements.forEach(cell => {
+    cell.addEventListener("click", handleCellClick);
+  });
+
+  resetButton.addEventListener("click", handleReset);
+
+  renderBoard();
+
+})();
+
